@@ -13,18 +13,36 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entities.MailBox;
 import com.example.demo.service.MailService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/v1")
+@Api(tags = "Mail Controller")
 public class MailController {
 
+	private static final int SC_OK = 200;
+	private static final int SC_BAD_REQUEST = 400;
 	@Autowired
 	MailService mailService;
 	@GetMapping("")
+	@ApiOperation(value="Test Server")
+	@ApiResponses(value= {
+			@ApiResponse(code=SC_OK, message="OK"),
+			@ApiResponse(code=SC_BAD_REQUEST, message="Bad Request")
+	})
 	public ResponseEntity<String> index(){
 		return ResponseEntity.ok("Hello world");
 	}
 
 	@PostMapping("/sendEmail")
+	@ApiOperation(value="Send a simple email to another email")
+	@ApiResponses(value= {
+			@ApiResponse(code=SC_OK, message="OK"),
+			@ApiResponse(code=SC_BAD_REQUEST, message="Bad Request")
+	})
 	public String sendEmail(@RequestBody MailBox mailBox) {
 		System.out.println("Test email!");
 		String sendEmailRes = "";
