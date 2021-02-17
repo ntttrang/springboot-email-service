@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:remove="all">[TEST SEND EMAIL] Subscription Payment Problem</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <p th:text="#{greeting(${name})}">
+      Dear, Peter Static!
+    </p>
+    <p th:if="${name.length() > 10}">
+      Wow! You've got a long name (more than 10 chars)!
+    </p>
+    <p>
+      Your subscription to <b>XXX</b> was not renewed 
+      due to a problem with your current payment method.
+      It's status is expired on
+      <span th:text="${#dates.format(subscriptionDate, 'dd-MM-yyyy')}">28-12-2012.</span>
+    </p>
+    <!--
+    <p>Your hobbies are:</p>
+    <ul th:remove="all-but-first">
+      <li th:each="hobby : ${hobbies}" th:text="${hobby}">Reading</li>
+      <li>Writing</li>
+      <li>Bowling</li>
+    </ul>  -->
+    <p>
+      To resubscribe, please <a style="text-decoration: underline;">update your payment method</a>,
+       then <a style="text-decoration: underline;">renew your subscription</a>.
+    </p>
+    <!--
+    <p>
+      <img src="sample.png" th:src="|cid:${imageResourceName}|" />
+    </p> -->
+    <p>
+      Regards, <br />
+      <em>Dev Team</em>
+    </p>
+  </body>
+</html>
