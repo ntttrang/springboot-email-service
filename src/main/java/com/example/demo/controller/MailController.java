@@ -44,11 +44,10 @@ public class MailController {
 			@ApiResponse(code=SC_BAD_REQUEST, message="Bad Request")
 	})
 	public String sendEmail(@RequestBody MailBox mailBox) {
-		System.out.println("Test email!");
 		String sendEmailRes = "";
 		boolean success = true;
 		try {
-			mailService.sendEmail(mailBox.getSubject(), mailBox.getMessage(), mailBox.getRecipientEmail());
+			mailService.sendSimpleMessage(mailBox.getSubject(), mailBox.getMessage(), mailBox.getRecipientEmail());
 		} catch (SendFailedException e) {
 			// TODO Auto-generated catch block
 			success = false;
