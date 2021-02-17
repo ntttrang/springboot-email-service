@@ -15,15 +15,22 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+/**
+ * The Class MailService.
+ */
 @Service
 public class MailService {
+	
+	/** The mail sender. */
 	@Autowired
 	private JavaMailSender mailSender;
 
+	/** The html template engine. */
 	@Qualifier("emailTemplateEngine")
 	@Autowired
 	private TemplateEngine htmlTemplateEngine;
 
+	/** The Constant EMAIL_SIMPLE_TEMPLATE_NAME. */
 	private static final String EMAIL_SIMPLE_TEMPLATE_NAME = "html/email_simple";
 
 	/**

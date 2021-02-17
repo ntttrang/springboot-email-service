@@ -18,31 +18,47 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.StringTemplateResolver;
 
+/**
+ * The Class SpringMailConfig.
+ */
 @Configuration
 @PropertySource("classpath:mail/emailconfig.properties")
 public class SpringMailConfig {
 
+	/** The host. */
 	@Value("${spring.mail.host}")
 	private String host;
 
+	/** The port. */
 	@Value("${spring.mail.port}")
 	private Integer port;
 
+	/** The user name. */
 	@Value("${spring.mail.username}")
 	private String userName;
 
+	/** The password. */
 	@Value("${spring.mail.password}")
 	private String password;
 
+	/** The protocol. */
 	@Value("${spring.mail.protocol}")
 	private String protocol;
 
+	/** The auth. */
 	@Value("${spring.mail.smtp.auth}")
 	private String auth;
 
+	/** The starttls enable. */
 	@Value("${spring.mail.smtp.starttls.enable}")
 	private String starttlsEnable;
 
+	/**
+	 * Mail sender.
+	 *
+	 * @return the java mail sender
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Bean
 	public JavaMailSender mailSender() throws IOException {
 
@@ -63,6 +79,11 @@ public class SpringMailConfig {
 		return mailSender;
 	}
 
+	/**
+	 * Email message source.
+	 *
+	 * @return the resource bundle message source
+	 */
 	@Bean
 	public ResourceBundleMessageSource emailMessageSource() {
 		final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
@@ -70,6 +91,11 @@ public class SpringMailConfig {
 		return messageSource;
 	}
 
+	/**
+	 * Html template resolver.
+	 *
+	 * @return the i template resolver
+	 */
 	private ITemplateResolver htmlTemplateResolver() {
 		final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 		templateResolver.setOrder(2);
@@ -83,7 +109,8 @@ public class SpringMailConfig {
 	}
 
 	/**
-	 * 
+	 * Text template resolver.
+	 *
 	 * @return ITemplateResolver
 	 */
 	private ITemplateResolver textTemplateResolver() {
@@ -98,6 +125,11 @@ public class SpringMailConfig {
 		return templateResolver;
 	}
 
+	/**
+	 * String template resolver.
+	 *
+	 * @return the i template resolver
+	 */
 	private ITemplateResolver stringTemplateResolver() {
 		final StringTemplateResolver templateResolver = new StringTemplateResolver();
 		templateResolver.setOrder(Integer.valueOf(3));
@@ -108,6 +140,11 @@ public class SpringMailConfig {
 		return templateResolver;
 	}
 
+	/**
+	 * Email template engine.
+	 *
+	 * @return the template engine
+	 */
 	@Bean
 	public TemplateEngine emailTemplateEngine() {
 		final SpringTemplateEngine templateEngine = new SpringTemplateEngine();

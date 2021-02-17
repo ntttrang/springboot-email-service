@@ -19,15 +19,29 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The Class MailController.
+ */
 @RestController
 @RequestMapping("/api/v1")
 @Api(tags = "Mail Controller")
 public class MailController {
 
+	/** The Constant SC_OK. */
 	private static final int SC_OK = 200;
+	
+	/** The Constant SC_BAD_REQUEST. */
 	private static final int SC_BAD_REQUEST = 400;
+	
+	/** The mail service. */
 	@Autowired
 	MailService mailService;
+	
+	/**
+	 * Index.
+	 *
+	 * @return the response entity
+	 */
 	@GetMapping("")
 	@ApiOperation(value="Test Server")
 	@ApiResponses(value= {
@@ -38,6 +52,12 @@ public class MailController {
 		return ResponseEntity.ok("Hello world");
 	}
 
+	/**
+	 * Send text email.
+	 *
+	 * @param mailBox the mail box
+	 * @return the string
+	 */
 	@PostMapping("/sendTextEmail")
 	@ApiOperation(value="Send a simple text email to another email")
 	@ApiResponses(value= {
@@ -59,6 +79,12 @@ public class MailController {
 
 	}
 	
+	/**
+	 * Send HTML email.
+	 *
+	 * @param mailBox the mail box
+	 * @return the string
+	 */
 	@PostMapping("/sendHTMLEmail")
 	@ApiOperation(value="Send a simple HTML email to another email")
 	@ApiResponses(value= {
